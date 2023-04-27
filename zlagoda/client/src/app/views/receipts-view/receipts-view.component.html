@@ -1,0 +1,54 @@
+<mat-spinner *ngIf="isLoading"></mat-spinner>
+
+<ng-container *ngIf="!isLoading">
+  <section class="actions">
+    <search-bar></search-bar>
+
+    <button mat-icon-button (click)="onAddReceiptClicked()">
+      <mat-icon>add</mat-icon>
+    </button>
+
+    <ng-container *ngIf="isManager">
+      <button mat-icon-button (click)="onSumOfPeriodClicked()" matTooltip="Sum for period">
+        <mat-icon>attach_money</mat-icon>
+      </button>
+      <button mat-icon-button (click)="onCashierStatsClicked()" matTooltip="Cashier stats">
+        <mat-icon>table_rows</mat-icon>
+      </button>
+    </ng-container>
+  </section>
+
+  <table mat-table [dataSource]="dataSource">
+    <ng-container matColumnDef="employeeName">
+      <th mat-header-cell *matHeaderCellDef> Cashier Name </th>
+      <td mat-cell *matCellDef="let receipt">
+        {{ receipt.employee.surname + ' ' + receipt.employee.name }}
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="cardHolderName">
+      <th mat-header-cell *matHeaderCellDef> Card Holder Name </th>
+      <td mat-cell *matCellDef="let receipt">
+        {{ getCardHolderName(receipt) }}
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="printDate">
+      <th mat-header-cell *matHeaderCellDef> Print Date </th>
+      <td mat-cell *matCellDef="let receipt">
+        {{ formatDate(receipt.dateOfPrinting) }}
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="total">
+      <th mat-header-cell *matHeaderCellDef> Total </th>
+      <td mat-cell *matCellDef="let receipt">
+        {{ receipt.total | currency: 'UAH' }}
+      </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="columnsToDisplay"></tr>
+    <tr mat-row *matRowDef="let receipt; columns: columnsToDisplay" (click)="onReceiptClicked(receipt)"></tr>
+  </table>
+  <mat-paginator />
+</ng-container>

@@ -1,0 +1,30 @@
+<form [formGroup]="formGroup" (submit)="submitForm()">
+  <h1 mat-dialog-title>Product</h1>
+
+  <mat-dialog-content>
+    <mat-form-field>
+      <mat-label>Name</mat-label>
+      <input matInput formControlName="name"/>
+    </mat-form-field>
+
+    <br/>
+    <mat-form-field>
+      <mat-label>Description</mat-label>
+      <input matInput formControlName="description"/>
+    </mat-form-field>
+
+    <br/>
+    <mat-form-field>
+      <mat-label>Category</mat-label>
+      <mat-select formControlName="category">
+        <mat-option *ngFor="let category of categories$ | async" [value]="category"> {{ category.name }} </mat-option>
+      </mat-select>
+    </mat-form-field>
+  </mat-dialog-content>
+
+  <mat-dialog-actions align="end">
+    <button type="button" mat-button (click)="dialogRef.close()">Cancel</button>
+    <button *ngIf="isEditing" mat-button color="warn" (click)="deleteProduct(product)">Delete</button>
+    <button mat-raised-button color="primary" type="submit" [disabled]="formGroup.invalid">Save</button>
+  </mat-dialog-actions>
+</form>

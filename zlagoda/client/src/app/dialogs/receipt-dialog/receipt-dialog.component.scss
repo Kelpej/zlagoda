@@ -1,0 +1,30 @@
+/* CSS styles for the mat-list in the mat-dialog */
+.mat-dialog-content mat-list {
+  padding: 0;
+  border: none;
+}
+
+.mat-dialog-content mat-list-item {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.12);
+}
+
+.mat-dialog-content mat-list-item:last-child {
+  border-bottom: none;
+}
+
+.mat-dialog-content mat-list-item h3 {
+  margin: 0;
+  font-size: 16px;
+  font-weight: 500;
+}
+
+.mat-dialog-content mat-list-item input {
+  width: 80px;
+  margin-left: 16px;
+  text-align: right;
+}

@@ -1,0 +1,19 @@
+<mat-spinner *ngIf="isLoading"></mat-spinner>
+
+<ng-container *ngIf="!isLoading">
+  <section class="actions">
+    <search-bar></search-bar>
+
+    <button mat-icon-button (click)="onAddCategoryClicked()">
+      <mat-icon>add</mat-icon>
+    </button>
+  </section>
+
+  <table mat-table [dataSource]="dataSource">
+    <mat-text-column name="name"></mat-text-column>
+
+    <tr mat-header-row *matHeaderRowDef="columnsToDisplay"></tr>
+    <tr mat-row *matRowDef="let product; columns: columnsToDisplay" (click)="onCategoryClicked(product)"></tr>
+  </table>
+  <mat-paginator />
+</ng-container>

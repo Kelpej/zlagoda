@@ -1,0 +1,16 @@
+<form [formGroup]="formGroup" (submit)="submitForm()">
+  <h1 mat-dialog-title>Product</h1>
+
+  <mat-dialog-content>
+    <mat-form-field>
+      <mat-label>Name</mat-label>
+      <input matInput formControlName="name"/>
+    </mat-form-field>
+  </mat-dialog-content>
+
+  <mat-dialog-actions align="end">
+    <button type="button" mat-button (click)="dialogRef.close()">Cancel</button>
+    <button *ngIf="isEditing" mat-button color="warn" (click)="deleteCategory(category)">Delete</button>
+    <button mat-raised-button color="primary" type="submit" [disabled]="formGroup.invalid">Save</button>
+  </mat-dialog-actions>
+</form>

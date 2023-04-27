@@ -1,0 +1,29 @@
+<mat-spinner *ngIf="isLoading"></mat-spinner>
+
+<ng-container *ngIf="!isLoading">
+  <mat-tab-group dynamicHeight>
+    <mat-tab label="Products">
+      <products-view/>
+    </mat-tab>
+
+    <mat-tab label="Products in Store">
+      <products-in-store-view/>
+    </mat-tab>
+
+    <mat-tab label="Categories">
+      <category-view></category-view>
+    </mat-tab>
+
+    <mat-tab label="Employees" *ngIf="isManager() | async">
+      <employees-view/>
+    </mat-tab>
+
+    <mat-tab label="Customer Cards">
+      <customer-cards-view/>
+    </mat-tab>
+
+    <mat-tab label="Receipts">
+      <receipts-view [isManager]="isManager() | async" [cashier]="user() | async" />
+    </mat-tab>
+  </mat-tab-group>
+</ng-container>

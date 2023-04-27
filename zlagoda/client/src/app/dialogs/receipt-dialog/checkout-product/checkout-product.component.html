@@ -1,0 +1,17 @@
+<div class="product">
+  <mat-card>
+    <mat-card-header>
+      <mat-card-title>{{ product.name }}</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <p>Price: {{ product.price | currency: 'UAH' }}</p>
+      <mat-form-field>
+        <input matInput type="number" #quantity placeholder="Quantity" [value]="'1'" min="1" max="{{ product.quantity }}"
+               (change)="onQuantityChange(quantity.value)">
+      </mat-form-field>
+    </mat-card-content>
+    <mat-card-actions>
+      <button mat-button (click)="remove.emit(product)">Remove</button>
+    </mat-card-actions>
+  </mat-card>
+</div>

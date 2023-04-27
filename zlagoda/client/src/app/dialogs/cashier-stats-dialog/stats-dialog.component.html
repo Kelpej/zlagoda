@@ -1,0 +1,9 @@
+<mat-dialog-content>
+  <table mat-table [dataSource]="dataSource">
+    <mat-text-column name="name" />
+    <mat-text-column name="value" />
+
+    <tr mat-header-row *matHeaderRowDef="columnsToDisplay"></tr>
+    <tr mat-row *matRowDef="let row; columns: columnsToDisplay"></tr>
+  </table>
+</mat-dialog-content>
