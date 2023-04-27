@@ -1,0 +1,24 @@
+<form [formGroup]="formGroup" (submit)="submit()">
+  <mat-dialog-content>
+    <h2> {{ header }} </h2>
+    <mat-form-field>
+      <mat-label>From</mat-label>
+      <input matInput [matDatepicker]="fromPicker" formControlName="from">
+      <mat-datepicker-toggle matSuffix [for]="fromPicker"></mat-datepicker-toggle>
+      <mat-datepicker #fromPicker></mat-datepicker>
+    </mat-form-field>
+
+    <br/>
+    <mat-form-field>
+      <mat-label>To</mat-label>
+      <input matInput [matDatepicker]="toPicker" formControlName="to">
+      <mat-datepicker-toggle matSuffix [for]="toPicker"></mat-datepicker-toggle>
+      <mat-datepicker #toPicker></mat-datepicker>
+    </mat-form-field>
+  </mat-dialog-content>
+
+  <mat-dialog-actions align="end">
+    <button mat-button type="button" (click)="dialogRef.close()">Cancel</button>
+    <button mat-raised-button color="primary" type="submit" [disabled]="formGroup.invalid">Submit</button>
+  </mat-dialog-actions>
+</form>

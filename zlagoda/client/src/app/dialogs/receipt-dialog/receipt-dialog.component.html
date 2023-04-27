@@ -1,0 +1,40 @@
+<form [formGroup]="formGroup" (ngSubmit)="submitForm()">
+  <h1 mat-dialog-title>Receipt</h1>
+
+  <mat-dialog-content>
+    <mat-form-field>
+      <mat-label>Customer Card</mat-label>
+      <mat-select placeholder="Customer" formControlName="customerCard">
+        <mat-option *ngFor="let card of cards$ | async" [value]="card">
+          {{ card.holderSurname + ' ' + card.holderName }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <br/>
+    <mat-form-field>
+      <input type="search" matInput [formControl]="searchControl" [matAutocomplete]="auto"
+             placeholder="Type product name">
+
+      <mat-autocomplete #auto="matAutocomplete" (optionSelected)="onAddProduct($event)">
+        <mat-option *ngFor="let product of filteredProducts$ | async" [value]="product">
+          {{ product.name }}
+        </mat-option>
+      </mat-autocomplete>
+    </mat-form-field>
+
+    <section>
+      <checkout-product *ngFor="let product of selectedProducts"
+                        [product]="product"
+                        (quantityChange)="changeProductQuantity(product, $event.valueOf())"
+                        (remove)="onRemoveProduct($event)">
+      </checkout-product>
+    </section>
+
+    <mat-dialog-actions align="end">
+      <button type="button" mat-button (click)="dialogRef.close()">Cancel</button>
+      <button *ngIf="isEditing" mat-button color="warn" (click)="deleteReceipt(receipt)">Delete</button>
+      <button mat-raised-button color="primary" type="submit" [disabled]="formGroup.invalid">Save</button>
+    </mat-dialog-actions>
+  </mat-dialog-content>
+</form>

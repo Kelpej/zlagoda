@@ -1,0 +1,32 @@
+<mat-spinner *ngIf="isLoading"></mat-spinner>
+
+<ng-container *ngIf="!isLoading">
+  <section class="actions">
+    <search-bar (search)="findBySurname($event)"></search-bar>
+
+    <button mat-icon-button (click)="onAddCustomerCardClicked()">
+      <mat-icon>add</mat-icon>
+    </button>
+
+    <button mat-icon-button matTooltip="Client spent" (click)="showCustomerStats()">
+      <mat-icon>table_rows</mat-icon>
+    </button>
+
+    <button mat-icon-button matTooltip="Best clients" (click)="showNumbersOfBestCustomers()">
+      <mat-icon>person_search</mat-icon>
+    </button>
+  </section>
+
+  <table mat-table [dataSource]="dataSource">
+    <mat-text-column name="number"></mat-text-column>
+    <ng-container matColumnDef="Holder Name"></ng-container>
+    <mat-text-column name="holderName"></mat-text-column>
+    <mat-text-column name="holderSurname" label="Holder Surname"></mat-text-column>
+    <mat-text-column name="holderPatronymic" label="Holder Patronymic"></mat-text-column>
+    <mat-text-column name="discount"></mat-text-column>
+
+    <tr mat-header-row *matHeaderRowDef="columnsToDisplay"></tr>
+    <tr mat-row *matRowDef="let card; columns: columnsToDisplay" (click)="onCustomerCardClicked(card)"></tr>
+  </table>
+  <mat-paginator/>
+</ng-container>
